@@ -1,0 +1,58 @@
+{% extends 'bases/v1.html' %}
+
+{% block main_css %}{% endblock %}
+
+{% block body_content %}
+<body class="flex h-full dark:bg-coal-500">
+
+    <script>
+        const defaultThemeMode = 'light'; // light|dark|system
+             let themeMode;
+     
+             if ( document.documentElement ) {
+                 if ( localStorage.getItem('theme')) {
+                         themeMode = localStorage.getItem('theme');
+                 } else if ( document.documentElement.hasAttribute('data-theme-mode')) {
+                     themeMode = document.documentElement.getAttribute('data-theme-mode');
+                 } else {
+                     themeMode = defaultThemeMode;
+                 }
+     
+                 if (themeMode === 'system') {
+                     themeMode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                 }
+     
+                 document.documentElement.classList.add(themeMode);
+             }
+    </script>
+
+    <style>
+        .page-bg {
+                background-image: url('/static/metronic-tailwind-html/dist/assets/media/images/2600x1200/bg-10.png');
+            }
+            .dark .page-bg {
+                background-image: url('/static/metronic-tailwind-html/dist/assets/media/images/2600x1200/bg-10-dark.png');
+            }
+    </style>
+
+    <!-- Contenido de página -->
+    {% block default %}
+
+        {% from 'layout/partials/_header.html' import header  %}
+
+        {% block main %}
+            {% block main_content %}{% endblock %}
+        {% endblock %}
+
+        {% include "layout/partials/_footer.html" %}
+
+        
+        <!-- Drawers -->
+        {% include "partials/_drawers.html" %}
+
+        {% block main_modals %}{% endblock %}
+
+        {% block main_scripts %}{% endblock %}
+    {% endblock %}
+</body>
+{% endblock %}

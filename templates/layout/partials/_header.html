@@ -1,0 +1,31 @@
+{% macro header(params) %}
+<!--begin::Header-->
+<div id="kt_app_header" class="app-header d-print-none">
+    {# <!-- Menú primario --> #}
+    <div class="app-header-primary">
+        <!--begin::Header primary container-->
+        <div class="app-container container-fluid d-flex align-items-stretch justify-content-between" id="kt_app_header_primary_container">
+            <!--begin::Header primary wrapper-->
+            <div class="d-flex flex-stack flex-grow-1">
+                <div class="d-flex">
+                    {% include "layout/partials/header/_logo.html" %}
+
+                    {% from "layout/partials/header/_menu.html" import menu %}
+                    {{ menu(kwargs) }}
+                </div>
+                
+                {% from "layout/partials/header/_navbar.html" import navbar %}
+                {{ navbar(kwargs) }}
+            </div>
+            <!--end::Header primary wrapper-->                    
+        </div>
+        <!--end::Header primary container-->
+    </div>
+
+</div>
+<!--end::Header-->
+
+<!-- Sacamos a Martina del chat para que funcione correstamente -->
+{% include "partials/drawers/_martina_chat.html" %}
+
+{% endmacro %}
