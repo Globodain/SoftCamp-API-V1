@@ -505,7 +505,7 @@ class Prices:
         return JSONResponse(content=data)
     
     @router.get("/prices/{business_id}/{price_id}", response_model=GetPrice, tags=["Prices"])
-    async def get_payment(business_id: str, price_id: str, price: GetPrice, current_user: FindAPIUser = Depends(get_current_active_user)):
+    async def get_price(business_id: str, price_id: str, price: GetPrice, current_user: FindAPIUser = Depends(get_current_active_user)):
         query = db_app.prices.find_one({'_id': ObjectId(price_id), 'business_id': ObjectId(business_id)})
         if query is None:
             return {"message": "We can't find this price id. Check it and try again"}
@@ -523,9 +523,188 @@ class Prices:
         return update_price
 
     @router.delete("/prices/{business_id}/{price_id}", response_model=DeletePrice, tags=["Prices"])
-    async def delete_payment(business_id: str, price_id: str, price: DeletePrice, current_user: FindAPIUser = Depends(get_current_active_user)):
+    async def delete_price(business_id: str, price_id: str, price: DeletePrice, current_user: FindAPIUser = Depends(get_current_active_user)):
         query = db_app.prices.delete_one({'_id': ObjectId(price_id), 'business_id': ObjectId(business_id)})
         if query is None:
             return {"message": "We can't find this price id. Check it and try again"}
-        return {"message": "Invoice was deleted successfully!"}
+        return {"message": "Price was deleted successfully!"}
 
+
+class Discounts:
+    from models._classes import CreateDiscount,GetDiscounts,GetDiscount,UpdateDiscount,DeleteDiscount
+    discounts_object = {}
+    
+    @router.post("/discounts/{business_id}", response_model=CreateDiscount, tags=["Discounts"])
+    async def create_discount(business_id: str, discount: CreateDiscount, 
+                              current_user: dict = Depends(get_current_user)):
+        return {"item": discount}
+    
+    @router.get("/discounts/{business_id}", response_model=GetDiscounts, tags=["Discounts"])
+    async def get_discounts(business_id: str, discount: GetDiscounts, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.discounts.find({'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this business id. Check it and try again"}
+        
+        json_str = json_util.dumps(query)
+        data = json.loads(json_str)
+        return JSONResponse(content=data)
+    
+    @router.get("/discounts/{business_id}/{discount_id}", response_model=GetDiscount, tags=["Discounts"])
+    async def get_discount(business_id: str, discount_id: str, discount: GetDiscount, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.discounts.find_one({'_id': ObjectId(discount_id), 'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this discount id. Check it and try again"}
+        
+        json_str = json_util.dumps(query)
+        data = json.loads(json_str)
+        return JSONResponse(content=data)
+
+    @router.put("/discounts/{business_id}/{discount_id}", response_model=UpdateDiscount, tags=["Discounts"])
+    async def update_discount(business_id: str, discount_id: str, discount: UpdateDiscount, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.discounts.update_one({'_id': ObjectId(discount_id), 'business_id': ObjectId(business_id)}, {"$set": discount()})
+        if query is None:
+            return {"message": "We can't find this discount id. Check it and try again"}
+        update_discount = db_app.discounts.find_one({'_id': ObjectId(discount_id), 'business_id': ObjectId(business_id)})
+        return update_discount
+
+    @router.delete("/discounts/{business_id}/{discount_id}", response_model=DeleteDiscount, tags=["Discounts"])
+    async def delete_discount(business_id: str, discount_id: str, discount: DeleteDiscount, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.discounts.delete_one({'_id': ObjectId(discount_id), 'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this discount id. Check it and try again"}
+        return {"message": "Discount was deleted successfully!"}
+
+
+class Banks:
+    from models._classes import CreateBank,GetBanks,GetBank,UpdateBank,DeleteBank
+    banks_object = {}
+    
+    @router.post("/banks/{business_id}", response_model=CreateBank, tags=["Banks"])
+    async def create_bank(business_id: str, bank: CreateBank, 
+                              current_user: dict = Depends(get_current_user)):
+        return {"item": bank}
+    
+    @router.get("/banks/{business_id}", response_model=GetBanks, tags=["Banks"])
+    async def get_banks(business_id: str, bank: GetBanks, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.banks.find({'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this business id. Check it and try again"}
+        
+        json_str = json_util.dumps(query)
+        data = json.loads(json_str)
+        return JSONResponse(content=data)
+    
+    @router.get("/banks/{business_id}/{bank_id}", response_model=GetBank, tags=["Banks"])
+    async def get_bank(business_id: str, bank_id: str, bank: GetBank, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.banks.find_one({'_id': ObjectId(bank_id), 'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this bank id. Check it and try again"}
+        
+        json_str = json_util.dumps(query)
+        data = json.loads(json_str)
+        return JSONResponse(content=data)
+
+    @router.put("/banks/{business_id}/{bank_id}", response_model=UpdateBank, tags=["Banks"])
+    async def update_bank(business_id: str, bank_id: str, bank: UpdateBank, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.banks.update_one({'_id': ObjectId(bank_id), 'business_id': ObjectId(business_id)}, {"$set": bank()})
+        if query is None:
+            return {"message": "We can't find this bank id. Check it and try again"}
+        update_bank = db_app.banks.find_one({'_id': ObjectId(bank_id), 'business_id': ObjectId(business_id)})
+        return update_bank
+
+    @router.delete("/banks/{business_id}/{bank_id}", response_model=DeleteBank, tags=["Banks"])
+    async def delete_bank(business_id: str, bank_id: str, bank: DeleteBank, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.banks.delete_one({'_id': ObjectId(bank_id), 'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this bank id. Check it and try again"}
+        return {"message": "Bank was deleted successfully!"}
+
+
+class Services:
+    from models._classes import CreateService,GetServices,GetService,UpdateService,DeleteService
+    services_object = {}
+    
+    @router.post("/services/{business_id}", response_model=CreateService, tags=["Services"])
+    async def create_service(business_id: str, service: CreateService, 
+                              current_user: dict = Depends(get_current_user)):
+        return {"item": service}
+    
+    @router.get("/services/{business_id}", response_model=GetServices, tags=["Services"])
+    async def get_services(business_id: str, service: GetServices, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.services.find({'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this business id. Check it and try again"}
+        
+        json_str = json_util.dumps(query)
+        data = json.loads(json_str)
+        return JSONResponse(content=data)
+    
+    @router.get("/services/{business_id}/{service_id}", response_model=GetService, tags=["Services"])
+    async def get_service(business_id: str, service_id: str, service: GetService, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.services.find_one({'_id': ObjectId(service_id), 'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this service id. Check it and try again"}
+        
+        json_str = json_util.dumps(query)
+        data = json.loads(json_str)
+        return JSONResponse(content=data)
+
+    @router.put("/services/{business_id}/{service_id}", response_model=UpdateService, tags=["Services"])
+    async def update_service(business_id: str, service_id: str, service: UpdateService, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.services.update_one({'_id': ObjectId(service_id), 'business_id': ObjectId(business_id)}, {"$set": service()})
+        if query is None:
+            return {"message": "We can't find this service id. Check it and try again"}
+        update_service = db_app.services.find_one({'_id': ObjectId(service_id), 'business_id': ObjectId(business_id)})
+        return update_service
+
+    @router.delete("/services/{business_id}/{service_id}", response_model=DeleteService, tags=["Services"])
+    async def delete_service(business_id: str, service_id: str, service: DeleteService, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.services.delete_one({'_id': ObjectId(service_id), 'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this service id. Check it and try again"}
+        return {"message": "Service was deleted successfully!"}
+
+
+class Persons:
+    from models._classes import CreatePerson,GetPersons,GetPerson,UpdatePerson,DeletePerson
+    persons_object = {}
+    
+    @router.post("/persons/{business_id}", response_model=CreatePerson, tags=["Persons"])
+    async def create_person(business_id: str, person: CreatePerson, 
+                              current_user: dict = Depends(get_current_user)):
+        return {"item": person}
+    
+    @router.get("/persons/{business_id}", response_model=GetPersons, tags=["Persons"])
+    async def get_persons(business_id: str, person: GetPersons, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.persons.find({'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this business id. Check it and try again"}
+        
+        json_str = json_util.dumps(query)
+        data = json.loads(json_str)
+        return JSONResponse(content=data)
+    
+    @router.get("/persons/{business_id}/{person_id}", response_model=GetPerson, tags=["Persons"])
+    async def get_person(business_id: str, person_id: str, person: GetPerson, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.persons.find_one({'_id': ObjectId(person_id), 'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this person id. Check it and try again"}
+        
+        json_str = json_util.dumps(query)
+        data = json.loads(json_str)
+        return JSONResponse(content=data)
+
+    @router.put("/persons/{business_id}/{person_id}", response_model=UpdatePerson, tags=["Persons"])
+    async def update_person(business_id: str, person_id: str, person: UpdatePerson, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.persons.update_one({'_id': ObjectId(person_id), 'business_id': ObjectId(business_id)}, {"$set": person()})
+        if query is None:
+            return {"message": "We can't find this person id. Check it and try again"}
+        update_person = db_app.persons.find_one({'_id': ObjectId(person_id), 'business_id': ObjectId(business_id)})
+        return update_person
+
+    @router.delete("/persons/{business_id}/{person_id}", response_model=DeletePerson, tags=["Persons"])
+    async def delete_person(business_id: str, person_id: str, person: DeletePerson, current_user: FindAPIUser = Depends(get_current_active_user)):
+        query = db_app.persons.delete_one({'_id': ObjectId(person_id), 'business_id': ObjectId(business_id)})
+        if query is None:
+            return {"message": "We can't find this person id. Check it and try again"}
+        return {"message": "Person was deleted successfully!"}
