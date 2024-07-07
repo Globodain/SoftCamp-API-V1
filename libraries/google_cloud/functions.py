@@ -2,7 +2,7 @@ from google.cloud import storage
 from google.oauth2 import service_account
 from libraries.google_cloud.buckets import Buckets
 
-credentials = service_account.Credentials.from_service_account_file('libraries/google_cloud/client.json')
+credentials = service_account.Credentials.from_service_account_file('client.json')
 storage_client = storage.Client(credentials=credentials)
 
 class Functions:
