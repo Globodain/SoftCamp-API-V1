@@ -1,6 +1,6 @@
 from config.settings import Config
 
-instance = 'development' # Development, Testing, Deployment
+instance = 'testing' # Development, Testing, Deployment
 config = Config(instance)
 
 # Configuración de MongoDB

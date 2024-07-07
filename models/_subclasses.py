@@ -27,7 +27,7 @@ class General:
         city: str
         province: str
         country: str
-        zip: str
+        zipcode: str
 
     class BaseMap(BaseModel):
         file: str
@@ -90,3 +90,41 @@ class BusinessSubclass:
     
     class Martina(BaseModel):
         tokens: str
+    
+class UserSubclass:
+    
+    class Personal(BaseModel):
+        name: str
+        surname: str
+        surname2: str
+        born: str
+        location: General.Location
+        identity: str
+        phone: Components.Phone
+    
+    class Emails(BaseModel):
+        newsletter: bool
+
+class TasksSubclass:
+    
+    class Task(BaseModel):
+        title: str
+        msg: str
+        code: int
+        status: str
+
+
+### Repository
+class File(BaseModel):
+    id: str
+    filename: str
+    status: str
+    uploaded: datetime
+    
+class RepositorySubclass:
+    class Folders(BaseModel):
+        title: str
+        description: str
+        color: str
+        files: List[File]
+        status: str

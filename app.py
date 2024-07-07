@@ -1,10 +1,20 @@
-from fastapi import FastAPI, Request
-from fastapi import FastAPI
-from starlette.middleware.base import BaseHTTPMiddleware
-from starlette.responses import RedirectResponse
+"""
+<!-- -| 
+  
+  * Softcamp is a registered trademark in Spain as SoftCamp Spain, S.L
+  * Any disclosure of this code violates intellectual property laws.
+  * By Ruben Ayuso. 
+  
+|- -->
+"""
 
+from fastapi import FastAPI, Request
+from starlette.middleware.base import BaseHTTPMiddleware, RequestResponseEndpoint
+from starlette.responses import RedirectResponse, Response
+from fastapi.responses import HTMLResponse
 from public.routes import router
 from models._metadata import tags_metadata
+import aiofiles
 
 app = FastAPI(
     title="API Documentation",
@@ -21,20 +31,23 @@ app = FastAPI(
     }
 )
 
-# Comprobamos si el usuario tiene acceso a las rutas
 class AuthMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         if request.url.path in ["/", "/documentation", "/endpoints"]:
-            # Aquí debes implementar tu lógica de autenticación.
-            # Por ejemplo, puedes comprobar si hay una cookie de sesión válida:
-            print("Entra aquí")
-            print(request.cookies)
             if not "session" in request.cookies:
-                print("Entra en not cookies")
-                # Si el usuario no está autenticado, redirigir a la página de inicio de sesión
                 return RedirectResponse(url="/account")
         response = await call_next(request)
         return response
 
+class ErrorHandlerMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: Request, call_next: RequestResponseEndpoint) -> Response:
+        response = await call_next(request)
+        if response.status_code == 404:
+            async with aiofiles.open('templates/errors/404.html', mode='r') as f:
+                content = await f.read()
+            return HTMLResponse(content=content, status_code=404)
+        return response
+
 app.add_middleware(AuthMiddleware)
+app.add_middleware(ErrorHandlerMiddleware)
 app.include_router(router)

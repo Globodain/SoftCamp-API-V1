@@ -19,6 +19,10 @@ tags_metadata = [
         },
     },
     {
+        "name": "Invitations",
+        "description": "",
+    },
+    {
         "name": "Users",
         "description": "",
     },
@@ -64,6 +68,14 @@ tags_metadata = [
     },
     {
         "name": "Persons",
+        "description": "",
+    },
+    {
+        "name": "TasksLog",
+        "description": "",
+    },
+    {
+        "name": "Repository",
         "description": "",
     },
 ]

@@ -53,9 +53,9 @@ class Config(object):
         self.DEBUG = False
         self.CSRF_ENABLED = True
         self.WTF_CSRF_ENABLED = True
-        self.BASE_URL = "https://api.softcamp.eu"
+        self.BASE_URL = "https://devs.softcamp.eu"
         
-        self.MONGO_URI_APP = os.getenv("DATABASE_REMOTE_URL")
+        self.MONGO_URI_APP = os.getenv("DATABASE_TESTING_URL")
         self.MONGO_URI_API = os.getenv("API_DATABASE_DEPLOYMENT_URL")
         self.MONGO_URI_COMMUNITY = os.getenv("DATABASE_COMMUNITY_REMOTE_URL")
 
@@ -72,7 +72,7 @@ class Config(object):
         self.BASE_URL = "http://localhost:8000"
         
         self.MONGO_URI_APP = os.getenv("DATABASE_TESTING_URL")
-        self.MONGO_URI_API = os.getenv("API_DATABASE_TESTING_URL")
+        self.MONGO_URI_API = os.getenv("API_DATABASE_DEPLOYMENT_URL")
         self.MONGO_URI_COMMUNITY = os.getenv("DATABASE_COMMUNITY_TESTING_URL")
 
         self.STRIPE_API_SECRET_KEY = self.STRIPE_TEST_API_SECRET_KEY
@@ -84,7 +84,6 @@ class Config(object):
         self.OAUTHLIB_INSECURE_TRANSPORT = True
 
         ## DATABASE MONGO URI
-        self.MONGO_URI_APP = os.getenv("DATABASE_LOCAL_URL")
         self.MONGO_URI_API = os.getenv("API_DATABASE_LOCAL_URL")
         self.MONGO_URI_COMMUNITY = os.getenv("DATABASE_COMMUNITY_LOCAL_URL")
 
@@ -97,7 +96,6 @@ class Config(object):
             FLASK_APP=os.getenv('FLASK_APP'),
             SECRET_KEY=self.SECRET_KEY,
             BASE_URL = self.BASE_URL,
-            MONGO_URI_APP=self.MONGO_URI_APP,
             MONGO_URI_API=self.MONGO_URI_API,
             MONGO_URI_COMMUNITY=self.MONGO_URI_COMMUNITY,
             CSRF_ENABLED=self.CSRF_ENABLED,

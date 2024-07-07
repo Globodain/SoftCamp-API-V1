@@ -1,0 +1,14 @@
+{
+    "type": "service_account",
+    "project_id": "softcamp-420716",
+    "private_key_id": "cb33a54d52283fd99cfb1ed7cd57d1c8a9cc4992",
+    "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvwIBADANBgkqhkiG9w0BAQEFAASCBKkwggSlAgEAAoIBAQDT1FYMnLuRnv1T\noBFuuSQkHtA2OgVoqa/jL1TGiIsnaXr4m6YpnFNbC4xYNd6yk4/ZER2X0U69CqSX\n/YZF53YZSKJkPT6ZovtYRLz8QPeDGKHPIsv4ly5D1eGVVaOzAxCiQLW/6VFDEvJn\n9D43/rWiRCOjQ5Qr3EYi1QXq2Y9U0t9l3Hnro8p/Q/ER20xI5un6mjjn+UPuae7i\n8pFBV0pusQkgDC4KngDUKumdb3UDiGg2l/+uMNEbJqWCoISMnBGdw7x3xWyA3fBE\n1mdLToBnFGeJAkDKHPdjyfSlTqgZgX68VX8JZwCFbguEN+0WwCQeGfITsAqxIXgp\nNyUn/hXPAgMBAAECggEAARLZms0X5Z2M2CXUC3UfGfButWT8OQhpzqN4m7GpJDp/\nIo/GEFOYAo/06/ozQOwe4Fvwrp/OH9wpcxHDDUtRMxXwqMRnXael/CULtirtdjnO\nPCVc1kuMiFB8XmGQPQHeIuG5ahnDIoK6ksyknMEK56HOcm85wDJ+HS1qOcNU3CUG\nbkao5Bkco0kynbS5biE5xU2ZuKKs9tNQIQPbYVgAZxAVSYwz3bgnW6cZWRXOTaum\nJxW3xJFBmZMj23FYf7yRsjWhRz0+KAPnYL3euGQlyE7X8IdyvgWaLIZQYfFzlXg5\no3qAXQOSk/VJfCqsCC8maZpwUOzP87AJwhmt2afRqQKBgQD/cJfCaudgmTAPOngz\nCcVosI8zcPCnkAYFhAhiNOAPu3rv4sB4XgsCiyU4a0jY+Vp+/PR25Lyax97hpU43\nYAKgMiLxl6rb6vi76f9bkJi8h8fM7M77GmsVFy8eMqe+TkkC0WvKU0yWWUydxM5x\n6qTKTvahiM3IAsek7T8nuI4kNwKBgQDUS0KIa4oi8eSwNKLVR9+v5OyPXc79FyTg\nxMlAv52TBhKBT6v8H+gYgnjpL7hbcqU/nrMwtSPuRFLdO9UbqF9OpxsV/aGEcNsC\nyiSonzH4cT/TOeT3OgbERc5q3aZg7WgvE4YFwEzTF43iSYC0szlVYAPoFuxf1tH3\nm3R+6VV/KQKBgQDLbf7ejcbhLn6Q0i7h7rkxy9Lv09VEjTXOdL08gQGkZdnda8d+\n1N6N0wT8bqygZ82Dbq6+dSIjXmQJbl3hSewtamBb6T7gT7xx40RDxt9s3fHoKPwa\nDIsVS9ZxhUQEElKhFOl0Q2yuHEYhK5iCLq24lLRkJxBDZrtahLsURi2ldwKBgQCr\ntkgVce5kf4V7JMgEfUMn0aGqALWYruysRV+HWLXKouG66EdzAhfII1hLPMcAaMXS\npLnJjuqGIYto2Klx2olkY/OboO/Q4Tu0kO5/2WwgyPFYF37knXG1tcTVWXzm74AS\ne9cutbEuGOIxg0RwZHreXHAsfMYqauagQYRD1tXJqQKBgQDO50fvvdwjWMk3Pd09\nJA1GaYmxkigcD5+MmppXRLnwsrZK8rTlXFS+YgzOnrzc/DAR1fkyXbTqxy9rnqfs\nK6B50rSiUGkLEOj1ogRFKDqztnhOX9u5V0NbKI3+hJUPSp/ZqEH47fIjC2esD59B\nz6G1FOVlOzrVNX8XAB4n6OnnQw==\n-----END PRIVATE KEY-----\n",
+    "client_email": "application@softcamp-420716.iam.gserviceaccount.com",
+    "client_id": "113544567809958860821",
+    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+    "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/application%40softcamp-420716.iam.gserviceaccount.com",
+    "universe_domain": "googleapis.com"
+  }
+  
